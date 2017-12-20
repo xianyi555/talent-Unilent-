@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/xianyi555/Talent-Network/issues"
   },
-  "homepage": "https://github.com/xianyi555/Talent-Network#readme"
+  "homepage": "https://github.com/xianyi555/Talent-Network#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.7"
+  }
 }
