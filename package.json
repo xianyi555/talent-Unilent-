@@ -1,0 +1,19 @@
+{
+  "name": "talent-network",
+  "version": "1.0.0",
+  "description": "An app for finding people's talent",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xianyi555/Talent-Network.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xianyi555/Talent-Network/issues"
+  },
+  "homepage": "https://github.com/xianyi555/Talent-Network#readme"
+}
