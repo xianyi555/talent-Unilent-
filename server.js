@@ -12,9 +12,13 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(express.static('public'));
+
+
 app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
+
 
 
 
