@@ -21,3 +21,15 @@ var usersList = [{
   location: 'Boston',
   talents: [ 'piano', 'painting' ]
 }];
+
+
+db.User.remove({}, function(err, users){
+  // code in here runs after all users are removed
+  db.User.create(usersList, function(err, users){
+    // code in here runs after all users are created
+    if (err) { return console.log('ERROR', err); }
+    console.log("all users:", users);
+    console.log("created", users.length, "users");
+    process.exit();
+  }); 
+});
