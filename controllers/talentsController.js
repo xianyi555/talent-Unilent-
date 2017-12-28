@@ -29,14 +29,14 @@ function create(req, res) {
 
 // GET /api/talents/:talentId
 function show(req, res) {
-  db.Talent.findById(req.params.talent_id, function(err, foundTalent) {
+  db.Talent.findById(req.params.id, function(err, foundTalent) {
     res.json(foundTalent);
   });
 }
 
 // DELETE /api/talents/:talentId
 function destroy(req, res) {
-  db.Talent.findByIdAndRemove(req.params.talent_id, function(err, deletedTalent) {
+  db.Talent.findByIdAndRemove(req.params.id, function(err, deletedTalent) {
     if (err) { console.log('error', err); }
     res.json(deletedTalent);
 
