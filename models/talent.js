@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 
 
 var talentSchema = mongoose.Schema({
-    user_id        : Number,
+    user_id        : String,
     name           : String,
     description    : String,
 });

@@ -2,81 +2,42 @@ console.log('app.js is working!')
 
 $(document).ready(function() {
 
+
+  $("#addTalent").on("submit", function(e){
+    e.preventDefault()
+    $.ajax({
+      method: "POST",
+      url: "/api/talents",
+      data: $(this).serialize(),
+      success: function create(){
+        $('#talent_list').text("")
+        $.ajax({
+          method: "GET",
+          url: "/api/talents",
+          success: handleGetSuccess,
+          error: handleError
+        });
+      },
+      error: handleError
+    })
+  })
+
 // GET REQUEST FROM DATABASE
   $.ajax({
     method: "GET",
-    url: "/api/users",
+    url: "/api/talents",
     success: handleGetSuccess,
     error: handleError
   });
 
-  function handleGetSuccess(allUsersFromDb) {
-    allUsersFromDb.forEach(function(eachUser) {
-      var arrayOfTalentDivs = eachUser.talents.map(function(eachTalent) {
-        return `<div class="card">
-          <p>${eachTalent.name}</p>
-          <p>${eachTalent.description}</p>
-          <img src="${eachTalent.image}"/>
-        </div>`;
-      });
-
-      $('#users').prepend(`
-        <div class="panel" data-id="${eachUser._id}">
-          <button name="button"  type="button" class="delete-user btn btn-danger pull-right" data-id=${eachUser._id}>Delete</button>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Edit</button>
-               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                 <h5 class="modal-title" id="exampleModalLabel">Edit Info</h5>
-                  
-                  <form class = "edit-user" data-id="${eachUser._id}">
-                    <div class="form-group">
-                    <label class="col-md-4 control-label" for="userName" placeholder="what is your new Username?">New User Name</label>
-                    <div class="col-md-4">
-                      <input class="form-control" id="userName" name="name" placeholder = "add your new userName " value = "${eachUser.name}"></input>
-                    </div>
-                   </div>
-
-
-                  <div class="form-group">
-                    <label class="col-md-4 control-label" for="email" >Email</label>
-                    <div class="col-md-4">
-                      <input class="form-control" id="email" name="email" placeholder=" add your email here " value = "${eachUser.email}"></input>
-                    </div>
-                  </div>
-
-
-                  <div class="form-group">
-                    <label class="col-md-4 control-label" for="location">Location</label>
-                    <div class="col-md-4">
-                      <input class="form-control" id="location" name="location" placeholder="tell us your new location" value = "${eachUser.location}"></input>
-                    </div>
-                  </div>
-                  <button type="submit" class="edit-button class="btn btn-primary">Save New Info</button>
-                </form>
-                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                   <span aria-hidden="true">&times;</span>
-                 </button>
-
-
-        
-               </div>
-              <div class="modal-footer">
-             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-             </div>
-           </div>
-         </div>
-       </div>
-
-            <h4>Meet this talented person</h4>
-          <p>${eachUser.name}</p>
-          <p>${eachUser.email}</p>
-          <p>${eachUser.location}</p>
+  function handleGetSuccess(talents) {
+    console.log(talents)
+    talents.forEach(function(talent) {
+      $('#talent_list').append(`
           <div>
             <h4>Check out their talents</h4>
-            ${ arrayOfTalentDivs.join('') }
+               <p>${talent.name}<p>
+              <p>${talent.description}</p>
           </div>
 
           <div>
@@ -85,11 +46,12 @@ $(document).ready(function() {
           </div>
         </div>
       `);
-    });
+      });
+
   }
 
-  function handleError(errorResponse) {
-    console.log('There was an error: ', errorResponse);
+  function handleError(a,b,c) {
+    console.log(`There was an error:${b}     ${a}   ${c}`);
   }
 
 

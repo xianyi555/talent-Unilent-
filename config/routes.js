@@ -46,7 +46,7 @@ router.route("/secret")
 router.route("/talent")
   .get(authenticatedUser, talent.talent)
 
-router.route("/api/talent")
+router.route("/api/talents")
   .get(authenticatedUser, talent.index)
   .post(authenticatedUser, talent.create)
 

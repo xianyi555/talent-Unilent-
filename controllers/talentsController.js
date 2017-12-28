@@ -6,17 +6,25 @@ function talent(req, res) {
 
 // GET /api/talents
 function index(req, res) {
-  db.Talent.find({}, function(err, allTalents) {
-    res.json(allTalents);
+  db.Talent.find(function(err, talents) {
+    res.json(talents);
   });
 }
 
 // POST /api/talents
 function create(req, res) {
-  db.Talent.create(req.body, function(err, talent) {
+
+  var newTalent = new db.Talent({
+    user_id: currentUser.id,
+    name: req.body.name,
+    description: req.body.description
+  })
+
+  newTalent.save( function(err, talent) {
     if (err) { console.log('error', err); }
-    res.json(talent);
-  });
+    res.json(talent);}
+    )
+
 }
 
 // GET /api/talents/:talentId
