@@ -34,16 +34,15 @@ $(document).ready(function() {
     console.log(talents)
     talents.forEach(function(talent) {
       $('#talent_list').append(`
+        <div class="talent_object" id="${talent._id}">
           <div>
             <h4>Check out their talents</h4>
                <p>${talent.name}<p>
               <p>${talent.description}</p>
           </div>
 
-          <div>
-          <!-- Button trigger modal: Add Talent -->
-          <button type="button" class="btn btn-primary" data-toggle="modal"data-target="#addTalentButton">Add Talent</button>
-          </div>
+          <button type="button" class="deleteBtn btn btn-primary" >Add Talent</button>
+        </div>
         </div>
       `);
       });
@@ -52,6 +51,25 @@ $(document).ready(function() {
 
   function handleError(a,b,c) {
     console.log(`There was an error:${b}     ${a}   ${c}`);
+  }
+
+  $("#talent_list").on("click", ".deleteBtn", function(e){
+    console.log($(this).parent().attr('id'))
+    var id = $(this).parent().attr('id');
+
+    $.ajax({
+    method: "DELETE",
+    url: `/api/talent/${id}`,
+    success: handleDeleteSuccess,
+    error: handleError
+    });
+  })
+    
+
+  function handleDeleteSuccess(json){
+    console.log(json)
+    $(`#${json._id}`).remove()
+
   }
 
 
