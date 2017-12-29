@@ -17,6 +17,7 @@ function create(req, res) {
   var newTalent = new db.Talent({
     user_id: currentUser.id,
     name: req.body.name,
+    email: req.body.email,
     description: req.body.description
   })
 
@@ -49,9 +50,9 @@ function update(req, res) {
     if (err) { console.log('talentsController.update error', err); }
     foundTalent.name = req.body.name;
     foundTalent.email = req.body.email;
-    foundTalent.location = req.body.location;
+    foundTalent.description = req.body.description;
     foundTalent.save(function(err, savedTalent) {
-    if (err) { console.log('saving altered album failed'); }
+    if (err) { console.log('saving altered talent failed'); }
       res.json(savedTalent);
     });
   });

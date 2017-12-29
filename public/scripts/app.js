@@ -1,8 +1,6 @@
 console.log('app.js is working!')	
 
 $(document).ready(function() {
-
-
   $("#addTalent").on("submit", function(e){
     e.preventDefault()
     $.ajax({
@@ -37,17 +35,63 @@ $(document).ready(function() {
         <div class="talent_object" id="${talent._id}">
           <div>
             <h4>Check out their talents</h4>
-               <p>${talent.name}<p>
-              <p>${talent.description}</p>
+               <p>Talent Name: ${talent.name}</p>
+               <p>Email: ${talent.email}</p>
+               <p>Descripton: ${talent.description}</p>
           </div>
+            <!-- Button trigger modal -->
 
-          <button type="button" class="deleteBtn btn btn-primary" >Add Talent</button>
-        </div>
+            <button type="button" class="editBtn btn btn-primary" data-toggle="modal" data-target="#number${talent._id}">EDIT</button>
+            <button type="button" class="deleteBtn btn btn-danger">DELETE</button>
+
+                
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="number${talent._id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Info</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+
+                              <form id="editForm" data-id="${talent._id}>
+
+                              <div class="form-group">
+                                 <label for="name">Change Name</label>
+                                 <input type="text" name="updateName" class="form-control" value="${talent.name}">
+                              </div>
+                              <div class="form-group">
+                                 <label for="email">Change Email</label>
+                                 <input type="text" name="updateEmail" class="form-control" value="${talent.email}">
+                              </div>
+                              <div class="form-group">
+                                 <label for="description">Change Descripton</label>
+                                 <input type="text" name="updateDescription" class="form-control" value="${talent.description}">
+                              </div>
+
+                              </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+             
+
+          
         </div>
       `);
       });
 
   }
+
 
   function handleError(a,b,c) {
     console.log(`There was an error:${b}     ${a}   ${c}`);
@@ -55,11 +99,10 @@ $(document).ready(function() {
 
   $("#talent_list").on("click", ".deleteBtn", function(e){
     console.log($(this).parent().attr('id'))
-    var id = $(this).parent().attr('id');
 
     $.ajax({
     method: "DELETE",
-    url: `/api/talent/${id}`,
+    url: '/api/talent/'+ $(this).parent().attr('id'),
     success: handleDeleteSuccess,
     error: handleError
     });
@@ -73,91 +116,28 @@ $(document).ready(function() {
   }
 
 
-// SUBMIT BUTTON FOR CREATING NEW USER
-  $('#user-form form').on('submit', function(event) {
-    event.preventDefault();
-    var newUser = $(this).serialize();
-
-    $.ajax({
-      method: "POST",
-      url: '/api/users',
-      data: newUser,
-      success: onCreateSuccess,
-      error: handleError
-    });
-  });
-
-  function onCreateSuccess(createdUser) {
-
-      var arrayOfTalentDivs = createdUser.talents.map(function(createdTalent) {
-        return `<div class="card">
-          <p>${createdTalent.name}</p>
-          <p>${createdTalent.description}</p>
-          <img src="${createdTalent.image}"/>
-        </div>`;
-      });
-
-      $('#users').prepend(`
-        <div class="panel" data-id="${createdUser._id}">
-          <button name="button"  type="button" class="delete-user btn btn-danger pull-right" data-id=${createdUser._id}>Delete</button>
-            <h4>Meet this talented person</h4>
-          <p>${createdUser.name}</p>
-          <p>${createdUser.email}</p>
-          <p>${createdUser.location}</p>
-          <div>
-            <h4>Check out their talents</h4>
-            ${ arrayOfTalentDivs.join('') }
-          </div>
-
-          <div>
-          <!-- Button trigger modal: Add Talent -->
-          <button type="button" class="btn btn-primary" data-toggle="modal"data-target="#addTalentButton">Add Talent</button>
-          </div>
-        </div>`
-      )
-    };
 
 
-// DELETE BUTTON USER PROFILE
-  $('.container').on('click', '.delete-user', function() {
-    $.ajax({
-      method: 'DELETE',
-      url: '/api/users/'+$(this).attr('data-id'),
-      success: deleteUserSuccess,
-      error: handleError
-    });
-  });
+// EDIT BUTTON FOR TALENT
+  $('#talent_list').on('submit', '#editForm', function(event) {
+    console.log(event)
 
-  function deleteUserSuccess(userDeletedInDb) {
-    // find the user ID i want to delete
-    let userIdToDelete = userDeletedInDb._id;
-
-    // find the div with that same ID on the page
-    let $userDivToDelete = $(`.panel[data-id=${userIdToDelete}]`);
-
-    // write jquery to remove that div
-    $userDivToDelete.remove();
-  }
-
-// EDIT BUTTON FOR USER 
-  $('.container').on('submit', '.edit-user', function(event) {
     event.preventDefault();
     var updateUser = $(this).serialize();
     $.ajax({
       method: 'PUT',
-      url: '/api/users/'+ $(this).attr('data-id'),
+      url: '/api/users/'+ $(this).parent().attr('id'),
       data: updateUser,
       success: updateUserSuccess,
       error: handleError
     });
   });
+
  
   function updateUserSuccess(userEditInDb){
      console.log('response to update', userEditInDb);
      location.reload();
   }
-
-
 
 
 
