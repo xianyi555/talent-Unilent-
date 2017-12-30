@@ -38,6 +38,7 @@ function show(req, res) {
 // DELETE /api/talents/:talentId
 function destroy(req, res) {
   db.Talent.findByIdAndRemove(req.params.id, function(err, deletedTalent) {
+    console.log("asd")
     if (err) { console.log('error', err); }
     res.json(deletedTalent);
 
@@ -47,13 +48,14 @@ function destroy(req, res) {
 // PUT or PATCH /api/talents/:talentId
 function update(req, res) {
   db.Talent.findById(req.params.id, function(err, foundTalent) {
+    console.log(req.body)
     if (err) { console.log('talentsController.update error', err); }
     foundTalent.name = req.body.name;
     foundTalent.email = req.body.email;
     foundTalent.description = req.body.description;
     foundTalent.save(function(err, savedTalent) {
     if (err) { console.log('saving altered talent failed'); }
-      res.json(savedTalent);
+    res.json(savedTalent);
     });
   });
 }

@@ -58,26 +58,26 @@ $(document).ready(function() {
                           </div>
                           <div class="modal-body">
 
-                              <form id="editForm" data-id="${talent._id}>
+                              <form class="editForm" data-id="${talent._id}">
 
                               <div class="form-group">
                                  <label for="name">Change Name</label>
-                                 <input type="text" name="updateName" class="form-control" value="${talent.name}">
+                                 <input type="text" name="name" class="form-control" value="${talent.name}">
                               </div>
                               <div class="form-group">
                                  <label for="email">Change Email</label>
-                                 <input type="text" name="updateEmail" class="form-control" value="${talent.email}">
+                                 <input type="text" name="email" class="form-control" value="${talent.email}">
                               </div>
                               <div class="form-group">
                                  <label for="description">Change Descripton</label>
-                                 <input type="text" name="updateDescription" class="form-control" value="${talent.description}">
+                                 <input type="text" name="description" class="form-control" value="${talent.description}">
                               </div>
+                                <button type="button" class="btn btn-secondary pull-right" data-dismiss="modal">Close</button>
+                                <button type="submit" class="talentUpdate btn btn-primary pull-right">Save changes</button>
 
                               </form>
                           </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                          <div class="modal-footer" id="${talent._id}">
                           </div>
                         </div>
                       </div>
@@ -94,7 +94,7 @@ $(document).ready(function() {
 
 
   function handleError(a,b,c) {
-    console.log(`There was an error:${b}     ${a}   ${c}`);
+    console.log(`There was an error:${b} ${a}   ${c}`);
   }
 
   $("#talent_list").on("click", ".deleteBtn", function(e){
@@ -119,16 +119,17 @@ $(document).ready(function() {
 
 
 // EDIT BUTTON FOR TALENT
-  $('#talent_list').on('submit', '#editForm', function(event) {
-    console.log(event)
+  $('#talent_list').on('click', '.talentUpdate', function(event) {
 
     event.preventDefault();
-    var updateUser = $(this).serialize();
+    console.log()
+    var updateUser = $(this).parent().serialize();
     $.ajax({
       method: 'PUT',
-      url: '/api/users/'+ $(this).parent().attr('id'),
+      url: '/api/talent/'+ $(this).parent().attr('data-id'),
       data: updateUser,
-      success: updateUserSuccess,
+      success: function update(json){
+        console.log(json)},
       error: handleError
     });
   });
@@ -136,7 +137,6 @@ $(document).ready(function() {
  
   function updateUserSuccess(userEditInDb){
      console.log('response to update', userEditInDb);
-     location.reload();
   }
 
 
