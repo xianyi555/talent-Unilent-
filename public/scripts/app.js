@@ -29,7 +29,6 @@ $(document).ready(function() {
   });
 
   function handleGetSuccess(talents) {
-    console.log(talents)
     talents.forEach(function(talent) {
       $('#talent_list').append(`
         <div class="talent_object" id="${talent._id}">
@@ -72,7 +71,7 @@ $(document).ready(function() {
                                  <label for="description">Change Descripton</label>
                                  <input type="text" name="description" class="form-control" value="${talent.description}">
                               </div>
-                                <button type="button" class="btn btn-secondary pull-right" data-dismiss="modal">Close</button>
+                                <button type="button" class="editClose btn btn-secondary pull-right" data-dismiss="modal">Close</button>
                                 <button type="submit" class="talentUpdate btn btn-primary pull-right">Save changes</button>
 
                               </form>
@@ -81,7 +80,7 @@ $(document).ready(function() {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div>  
 
              
 
@@ -110,7 +109,6 @@ $(document).ready(function() {
     
 
   function handleDeleteSuccess(json){
-    console.log(json)
     $(`#${json._id}`).remove()
 
   }
@@ -122,23 +120,27 @@ $(document).ready(function() {
   $('#talent_list').on('click', '.talentUpdate', function(event) {
 
     event.preventDefault();
-    console.log()
-    var updateUser = $(this).parent().serialize();
+    var updateTalent = $(this).parent().serialize();
     $.ajax({
       method: 'PUT',
       url: '/api/talent/'+ $(this).parent().attr('data-id'),
-      data: updateUser,
+      data: updateTalent,
       success: function update(json){
-        console.log(json)},
+        console.log(json);
+        $('.modal-backdrop').remove();
+
+      },
       error: handleError
     });
+      $('#talent_list').text("");
+      $.ajax({
+        method: "GET",
+        url: "/api/talents",
+        success: handleGetSuccess,
+        error: handleError
+      });
+
+
   });
-
- 
-  function updateUserSuccess(userEditInDb){
-     console.log('response to update', userEditInDb);
-  }
-
-
 
 });
