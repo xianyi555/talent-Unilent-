@@ -29,7 +29,7 @@ $(document).ready(function() {
   });
 
   function handleGetSuccess(talents) {
-    talent.forEach(function(talent) {
+    talents.forEach(function(talent) {
       $('#talent_list').append(`
         <div class="talent_object" id="${talent._id}">
           <div>
