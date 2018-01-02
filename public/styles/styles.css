@@ -27,16 +27,6 @@
 }
 
 
-
-.signupBody {
-    height: 100%;
-	width: 100%;
-	background-image: url("/images/signupBackground.jpg");
-	background-size: cover;
-	background-repeat: no-repeat;
-
-}
-
 .loginInput {
 	width: 200px;
 }
@@ -46,10 +36,9 @@
 }
 
 .signupFloat {
-	background-color: black;
 	float: right;
-	margin-right: 50px;
-	margin-top: 50px;
+	margin:-550px 60px 200px 0px;
+
 }
 
 .navbar {
@@ -57,3 +46,33 @@
 	font-color: white;
 
 }
+
+.talentInput {
+	width: 200px;
+}
+
+.talentTitle {
+    font-family: 'Alfa Slab One', cursive;
+}
+
+.footer-copyright {
+	background-color: #6495ED;
+	color:white;
+	margin-top: 120px;
+	text-align: center;
+}
+
+.linkToMe {
+	color: white;
+	text-decoration: underline;
+
+}
+
+.imageHome {
+	background-image: url("/images/michaeljackson.gif");
+    height: 300px;
+	width: 100%;
+	background-repeat: no-repeat;
+	margin-left: 300px;
+}
+

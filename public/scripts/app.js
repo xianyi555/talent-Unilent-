@@ -30,13 +30,19 @@ $(document).ready(function() {
 
   function handleGetSuccess(talents) {
     talents.forEach(function(talent) {
-      $('#talent_list').append(`
+      $('#talent_list').prepend(`
         <div class="talent_object" id="${talent._id}">
           <div>
-            <h4>Check out their talents</h4>
-               <p>Talent Name: ${talent.name}</p>
-               <p>Email: ${talent.email}</p>
-               <p>Descripton: ${talent.description}</p>
+            <form>
+              <fieldset class="talent-set>
+                <legend">
+                <h3>Check out their talents</h3>
+                   <p>Talent Name: ${talent.name}</p>
+                   <p>Email: ${talent.email}</p>
+                   <p>Descripton: ${talent.description}</p>
+                </legend>
+              </fieldset>
+            </form>
           </div>
             <!-- Button trigger modal -->
 

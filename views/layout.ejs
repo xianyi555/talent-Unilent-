@@ -30,7 +30,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="logo navbar-brand" href="/login">Unilent</a>
+          <a class="logo navbar-brand" href="/">Unilent</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -39,8 +39,7 @@
             <% if (currentUser) { %>
               <li><a class="bar" href="/logout">Logout</a></li>
             <% } else { %>
-<!--               <li><a class="bar" href="/login">Login</a></li>
- -->              <li><a class="bar" href="/signup">Signup</a></li>
+
             <% } %>
             <li><a class="bar" href="/secret">Only Show for Users</a></li>
           </ul>
@@ -51,6 +50,14 @@
     <main class="container">
       <%- body %>
     </main>
+
+    <footer>
+      <div class="footer-copyright">
+        <div class="container-fluid">
+            © 2017 Copyright: <a class="linkToMe" href="https://xianyi555.github.io">xianyi555.github.io</a>
+        </div>
+      </div>
+    </footer>
 
   </body>
 </html>
