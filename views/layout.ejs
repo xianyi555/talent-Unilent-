@@ -20,7 +20,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <nav class="navbar navbar-default">
+    <nav class="navbar">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -30,7 +30,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="logo navbar-brand" href="/">Unilent</a>
+          <a class="logo navbar-brand" href="/login">Unilent</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -39,8 +39,8 @@
             <% if (currentUser) { %>
               <li><a class="bar" href="/logout">Logout</a></li>
             <% } else { %>
-              <li><a class="bar" href="/login">Login</a></li>
-              <li><a class="bar" href="/signup">Signup</a></li>
+<!--               <li><a class="bar" href="/login">Login</a></li>
+ -->              <li><a class="bar" href="/signup">Signup</a></li>
             <% } %>
             <li><a class="bar" href="/secret">Only Show for Users</a></li>
           </ul>

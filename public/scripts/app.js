@@ -128,6 +128,7 @@ $(document).ready(function() {
       success: function update(json){
         console.log(json);
         $('.modal-backdrop').remove();
+        $('body').removeClass('modal-open')
 
       },
       error: handleError

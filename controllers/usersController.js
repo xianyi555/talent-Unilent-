@@ -8,7 +8,7 @@ function getSignup(req, res) {
 // POST /signup
 function postSignup(req, res) {
   var signupStrategy = passport.authenticate('local-signup', {
-    successRedirect: "/",
+    successRedirect: "/talent",
     failureRedirect: "/signup",
     failureFlash: true
   });
@@ -35,7 +35,7 @@ function postLogin(req, res) {
 // GET /logout
 function getLogout(req, res) {
   req.logout();
-  res.redirect("/");
+  res.redirect("/login");
 }
 
 // Restricted page

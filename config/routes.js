@@ -21,7 +21,7 @@ function unAuthenticatedUser(req, res, next) {
 
   // Otherwise
   req.flash('errorMessage', 'You are already logged in!');
-  return res.redirect('/');
+  return res.redirect('/talent');
 }
 
 

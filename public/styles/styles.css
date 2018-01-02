@@ -1,18 +1,32 @@
 .mainBody {
 	height: 100%;
 	width: 100%;
-	background-image: url("/images/indexBackground.jpg");
-	background-size: cover;
+	background-color: #F0FFFF;
+    background-size: cover;
 	background-repeat: no-repeat;
 }
 
 .logo {
 	font-family: 'Alfa Slab One', cursive;
+	color: white; 
+}
+
+.logo:hover {
+    background-color: white;
+    color: #6495ED;
 }
 
 .bar {
 	font-family: 'Carter One', cursive;
+	color: white;
 }
+
+.bar:hover {
+    background-color: white !important;
+    color: #6495ED;
+}
+
+
 
 .signupBody {
     height: 100%;
@@ -25,4 +39,21 @@
 
 .loginInput {
 	width: 200px;
+}
+
+.signupInput {
+	width: 200px;
+}
+
+.signupFloat {
+	background-color: black;
+	float: right;
+	margin-right: 50px;
+	margin-top: 50px;
+}
+
+.navbar {
+	background-color: #6495ED;
+	font-color: white;
+
 }
